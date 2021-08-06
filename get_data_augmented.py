@@ -3,7 +3,7 @@ import os, glob
 import numpy as np
 from sklearn import model_selection
 
-classes     = ["pancake","b","c"]
+classes     = ["pancake","salad","yakiniku"]
 num_classes = len(classes)
 image_size = 50
 num_tesdata = 100

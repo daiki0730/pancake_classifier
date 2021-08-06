@@ -8,7 +8,7 @@ from keras.utils import np_utils
 import keras
 import numpy as np
 
-classes     = ["pancake","b","c"]
+classes     = ["pancake","salad","yakiniku"]
 num_classes = len(classes)
 image_size  = 50
 
