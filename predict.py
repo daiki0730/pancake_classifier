@@ -8,7 +8,7 @@ import keras,sys
 import numpy as np
 from PIL import Image
 
-classes     = ["pancake","b","c"]
+classes     = ["pancake","salad","yakiniku"]
 num_classes = len(classes)
 image_size  = 50
 
