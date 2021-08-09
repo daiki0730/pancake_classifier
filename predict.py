@@ -14,7 +14,7 @@ image_size  = 50
 
 def build_model():
     model = Sequential()
-    model.add(Conv2D(32, (3, 3), padding='same',input_shape=(50, 50, 3)))
+    model.add(Conv2D(32, (3, 3), padding='same',input_shape=(50, 50, 50)))
     model.add(Activation('relu'))
     model.add(Conv2D(32, (3, 3)))
     model.add(Activation('relu'))
@@ -23,7 +23,7 @@ def build_model():
 
     model.add(Conv2D(64, (3, 3), padding='same'))
     model.add(Activation('relu'))
-    model.add(Conv2D(32, (3, 3)))
+    model.add(Conv2D(64, (3, 3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Dropout(0.25))
@@ -35,7 +35,7 @@ def build_model():
     model.add(Dense(3))
     model.add(Activation('softmax'))
 
-    opt = keras.optimizers.RMSprop(lr=0.0003, decay=1e-6)
+    opt = keras.optimizers.RMSprop(lr=0.0001, decay=1e-6)
 
     model.compile(loss='categorical_crossentropy', optimizer=opt,metrics=['accuracy'])
 
@@ -45,17 +45,18 @@ def build_model():
 
 def main():
     image = Image.open(sys.argv[1])
-    image = image.convert("RGB")
-    image = image.resize((image_size,image_size))
-    data  = np.asarray(image)
+    image = image.convert('RGB')
+    image = image.resize((image_size, image_size))
+    data = np.asarray(image)/255
     X = []
     X.append(data)
     X = np.array(X)
     model = build_model()
 
-    result     = model.predict([X])[0]
-    predicted  = result.argmax()
+    result = model.predict([X])[0]
+    predicted = result.argmax()
     percentage = int(result[predicted] * 100)
-    print("{0} ( {1} %)".format(classes[predicted], percentage))
+    print("{0} ({1} %)".format(classes[predicted], percentage))
+
 if __name__ == "__main__":
     main()
